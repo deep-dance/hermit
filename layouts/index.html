@@ -16,7 +16,10 @@
 		<div id="home-center">
 			<h1 id="home-title">{{ .Site.Title }}</h1>
 			{{- with .Site.Params.homeSubtitle }}
-			<p id="home-subtitle">{{.}}</p>
+			<h2 id="home-subtitle">{{.}}</h2>
+			{{- end }}
+			{{- with .Site.Params.homeAnnouncement }}
+			<h2 id="home-announcement">{{.}}</h2>
 			{{- end }}
 			{{- with .Site.Params.social }}
 			<div id="home-social">
