@@ -13,14 +13,60 @@
 	<div class="bg-img"></div>
 	{{- end }}
 	<div id="spotlight" class="animated fadeIn">
-		<div id="home-center">
-			<h1 id="home-title">{{ .Site.Title }}</h1>
-			{{- with .Site.Params.homeSubtitle }}
-			<h2 id="home-subtitle">{{.}}</h2>
+		<div id="home-content">
+			<div id="home-top">
+				<div id="home-gpt3" class="color-dark">
+					<p>
+						{{ range .Site.Params.gpt3.list }}
+							{{ .text }}
+						{{ end }}
+						<small class="color-bright">- {{ .Site.Params.gpt3.copyright}} <a href="{{ .Site.Params.gpt3.link}}">GPT-3 (AI)</a></small>
+					</p>
+					
+				</div>
+			</div>
+			<div id="home-bottom" class="color-bright">
+				<!-- <ul id="home-team">
+					{{- with .Site.Params.team.title }}
+						<h3>{{.}}</h3>
+					{{- end }}
+					{{ range .Site.Params.team.list }}
+                    	<li><b>{{ .position | markdownify }}: </b>{{ .name | markdownify }}</li>
+                	{{ end }}
+				</ul> -->
+
+				<ul id="home-funding">
+					<!-- {{- with .Site.Params.funding.title }}
+						<h3>{{.}}</h3>
+					{{- end }} -->
+					{{- with .Site.Params.funding.text }}
+						<p>{{ . | markdownify }}</p>
+					{{- end }}
+					{{ range .Site.Params.funding.list }}
+						<div class="icon" style="background-image: url({{ .icon }})">
+							<a target="_blank" href="{{ .href }}"></a>
+						</div>
+                    	<!-- <li><a href="{{ .href }}" target="_blank">> {{ .name | markdownify }}</a></li> -->
+                	{{ end }}
+				</ul>
+			</div>
+		</div>		
+		<div id="home-sticky">
+			<h2 id="home-title">{{ .Site.Title }}</h2>
+			{{- with .Site.Params.subtitle }}
+				<h3 id="home-title">{{.}}</h3>
 			{{- end }}
-			{{- with .Site.Params.homeAnnouncement }}
-			<h2 id="home-announcement">{{.}}</h2>
+			{{- with .Site.Params.date }}
+				<h5 id="home-date">{{.}}</h5>
 			{{- end }}
+			<!-- {{- with .Site.Params.location }}
+				<h2 id="home-location">{{.}}</h2>
+			{{- end }} -->
+			<!-- {{- with .Site.Params.homeAnnouncement }}
+				<h2 id="home-announcement">{{.}}</h2>
+			{{- end }} -->
+		</div>
+		<div id="home-footer">
 			{{- with .Site.Params.social }}
 			<div id="home-social">
 				{{ partialCached "social-icons.html" . }}
@@ -29,11 +75,8 @@
 			<nav id="home-nav" class="site-nav">
 				{{ partialCached "menu.html" . }}
 			</nav>
-		</div>
-		<div id="home-footer">
 			<p>
 				&copy; {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ .Site.Author.name }}</a>{{ .Site.Params.footerCopyright | safeHTML }}
-				{{- with (not (in (.Site.Language.Get "disableKinds") "RSS")) }} &#183; <a href="{{ "posts/index.xml" | absLangURL }}" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>{{ end }}
 			</p>
 		</div>
 	</div>
