@@ -6,14 +6,128 @@
 		<style>.bg-img {background-image: url('{{. | absURL}}');}</style>
 		{{- end -}}
 	{{- end -}}
-	<video autoplay muted loop id="bg-video">
-		<source src="Banner_2.mp4" type="video/mp4">
-	</video>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {{ end }}
 
 {{ define "main" }}
 	{{- if (or .Site.Params.images .Site.Params.bgImg) }}
 	<div class="bg-img"></div>
 	{{- end }}
-	
+	<div id="spotlight" class="animated fadeIn">
+		<div id="home-content">
+			<div id="home-title">
+				<div class="column-spacer-70"></div>
+				<div class="color-dark text-big underline">
+					{{- with .Site.Params.title }}
+						<p>{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.subtitle }}
+						<p>{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.date }}
+						<p>{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.time }}
+						<p>{{.}}</p>
+					{{- end }}
+				</div>
+			</div>
+			<div id="home-intro" class="text-big">
+				<div class="color-dark">
+					<p>
+						{{ range .Site.Params.intro.list }}
+							{{ .text }}
+						{{ end }}
+					</p>
+					
+				</div>
+			</div>
+			<div id="home-dates" class="color-bright">
+				<!-- <ul id="home-team">
+					{{- with .Site.Params.team.title }}
+						<h3>{{.}}</h3>
+					{{- end }}
+					{{ range .Site.Params.team.list }}
+                    	<li><b>{{ .position | markdownify }}: </b>{{ .name | markdownify }}</li>
+                	{{ end }}
+				</ul> -->
+			</div>
+			<div id="home-team" class="color-bright">
+				<!-- <ul id="home-team">
+					{{- with .Site.Params.team.title }}
+						<h3>{{.}}</h3>
+					{{- end }}
+					{{ range .Site.Params.team.list }}
+                    	<li><b>{{ .position | markdownify }}: </b>{{ .name | markdownify }}</li>
+                	{{ end }}
+				</ul> -->
+			</div>
+		</div>
+		{{/*  <div id="home-footer">
+			{{- with .Site.Params.social }}
+			<div id="home-social">
+				{{ partialCached "social-icons.html" . }}
+			</div>
+			{{- end }}
+			<nav id="home-nav" class="site-nav">
+				{{ partialCached "menu.html" . }}
+			</nav>
+			<p>
+				&copy; {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ .Site.Author.name }}</a>{{ .Site.Params.footerCopyright | safeHTML }}
+			</p>
+		</div>  */}}
+	</div>
+	<div id="spotlight-overlay" class="animated fadeIn">
+		<div id="home-content-overlay">
+			<div id="home-title-overlay">
+				<div class="column-spacer-70"></div>
+				<div class="color-dark text-big underline">
+					{{- with .Site.Params.title }}
+						<p>{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.subtitle }}
+						<p class="invisible">{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.date }}
+						<p class="invisible">{{.}}</p>
+					{{- end }}
+					{{- with .Site.Params.time }}
+						<p class="invisible">{{.}}</p>
+					{{- end }}
+				</div>
+			</div>
+			<!-- Placeholder -->
+			<div id="home-intro-overlay" class="text-big invisible">
+				<div class="color-dark">
+					<p>
+						{{ range .Site.Params.intro.list }}
+							{{ .text }}
+						{{ end }}
+					</p>
+					
+				</div>
+			</div>
+			<div id="home-about-overlay" class="color-bright">
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark text-small">
+					<p>
+						{{ range .Site.Params.about.list }}
+							{{ .text }}
+						{{ end }}
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		<div id="home-bottom-overlay" class="color-bright">
+			<div id="funding-links">
+				{{ range .Site.Params.funding.list }}
+					<div class="icon" style="background-image: url({{ .icon }})">
+						<a target="_blank" href="{{ .href }}"></a>
+					</div>
+				{{ end }}
+			</div>
+		</div>
+	</div>
+	<div id="overlay"></div>
 {{ end }}
