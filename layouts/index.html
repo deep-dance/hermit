@@ -17,7 +17,7 @@
 	<div id="spotlight" class="animated fadeIn">
 		<div id="home-content">
 			<div id="home-title">
-				<div class="column-spacer-70"></div>
+				<div class="column-spacer-90"></div>
 				<div class="color-dark text-big underline">
 					{{- with .Site.Params.title }}
 						<p>{{.}}</p>
@@ -33,16 +33,6 @@
 					{{- end }}
 				</div>
 			</div>
-			<div id="home-intro" class="text-big">
-				<div class="color-dark">
-					<p>
-						{{ range .Site.Params.intro.list }}
-							{{ .text }}
-						{{ end }}
-					</p>
-					
-				</div>
-			</div>
 			<div id="home-dates" class="color-bright">
 				<!-- <ul id="home-team">
 					{{- with .Site.Params.team.title }}
@@ -53,15 +43,40 @@
                 	{{ end }}
 				</ul> -->
 			</div>
+			<div id="home-intro" class="text-big">
+				<div class="color-dark">
+					<p>
+						{{ range .Site.Params.intro.list }}
+							{{ .text }}
+						{{ end }}
+					</p>
+					
+				</div>
+			</div>
+			<!-- Placeholder -->
+			<div id="home-about" class="color-bright invisible">
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark text-small">
+					<p>
+						{{ range .Site.Params.about.list }}
+							{{ .text }}
+						{{ end }}
+					</p>
+					
+				</div>
+			</div>
 			<div id="home-team" class="color-bright">
-				<!-- <ul id="home-team">
-					{{- with .Site.Params.team.title }}
-						<h3>{{.}}</h3>
-					{{- end }}
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark text-small">
 					{{ range .Site.Params.team.list }}
-                    	<li><b>{{ .position | markdownify }}: </b>{{ .name | markdownify }}</li>
-                	{{ end }}
-				</ul> -->
+						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						<ul>
+							{{ range split .name "," }}
+								<li>{{ . | markdownify }}</li>
+							{{ end }}
+						</ul>
+					{{ end }}
+				</div>
 			</div>
 		</div>
 		{{/*  <div id="home-footer">
@@ -81,7 +96,7 @@
 	<div id="spotlight-overlay" class="animated fadeIn">
 		<div id="home-content-overlay">
 			<div id="home-title-overlay">
-				<div class="column-spacer-70"></div>
+				<div class="column-spacer-90"></div>
 				<div class="color-dark text-big underline">
 					{{- with .Site.Params.title }}
 						<p>{{.}}</p>
@@ -90,10 +105,10 @@
 						<p class="invisible">{{.}}</p>
 					{{- end }}
 					{{- with .Site.Params.date }}
-						<p class="invisible">{{.}}</p>
+						<p class="">{{.}}</p>
 					{{- end }}
 					{{- with .Site.Params.time }}
-						<p class="invisible">{{.}}</p>
+						<p class="">{{.}}</p>
 					{{- end }}
 				</div>
 			</div>
@@ -108,6 +123,7 @@
 					
 				</div>
 			</div>
+			<!-- -->
 			<div id="home-about-overlay" class="color-bright">
 				<div class="column-spacer-40"></div>
 				<div class="content color-dark text-small">
@@ -119,16 +135,49 @@
 					
 				</div>
 			</div>
-		</div>
-		<div id="home-bottom-overlay" class="color-bright">
-			<div id="funding-links">
-				{{ range .Site.Params.funding.list }}
-					<div class="icon" style="background-image: url({{ .icon }})">
-						<a target="_blank" href="{{ .href }}"></a>
-					</div>
-				{{ end }}
+			<!-- Placeholder -->
+			<div id="home-team-overlay" class="color-bright invisible">
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark text-small">
+					{{ range .Site.Params.team.list }}
+						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						<ul>
+							{{ range split .name "," }}
+								<li>{{ . | markdownify }}</li>
+							{{ end }}
+						</ul>
+					{{ end }}
+				</div>
+			</div>
+			<!-- -->
+			<div id="home-funding-overlay" class="color-bright">
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark">
+					{{ range .Site.Params.funding.list }}
+						<div class="icon" style="background-image: url({{ .icon }})">
+							<a target="_blank" href="{{ .href }}"></a>
+						</div>
+					{{ end }}
+				</div>
+			</div>
+
+			<div id="home-newsletter-overlay" class="color-bright text-big">
+				<div class="column-spacer-40"></div>
+				<div class="content color-dark">
+					{{/*  {{- with .Site.Params.newsletter.headline }}
+						<p class="underline">{{.}}</p>
+					{{- end }}  */}}
+
+					{{ partialCached "newsletter.html" . }}
+
+
+					{{/*  {{- with .Site.Params.newsletter.cta }}
+						<a id="newsletter-cta" class="cta text-tiny" href="#">{{.}}</a>
+					{{- end }}  */}}
+				</div>
 			</div>
 		</div>
+		{{ partial "footer"}}
 	</div>
-	<div id="overlay"></div>
+	<div id="overlay" class="overlay"></div>
 {{ end }}
