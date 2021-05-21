@@ -18,6 +18,7 @@
 		<div id="home-content">
 			<div id="home-title">
 				<div class="column-spacer-90"></div>
+				<div class="column-spacer-90"></div>
 				<div class="color-dark text-big underline">
 					{{- with .Site.Params.title }}
 						<p>{{.}}</p>
@@ -70,6 +71,9 @@
 				<div class="content color-dark text-small">
 					{{ range .Site.Params.team.list }}
 						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						{{- with .position_extended }}
+							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
+						{{- end }} 
 						<ul>
 							{{ range split .name "," }}
 								<li>{{ . | markdownify }}</li>
@@ -96,6 +100,7 @@
 	<div id="spotlight-overlay" class="animated fadeIn">
 		<div id="home-content-overlay">
 			<div id="home-title-overlay">
+				<div class="column-spacer-90"></div>
 				<div class="column-spacer-90"></div>
 				<div class="color-dark text-big underline">
 					{{- with .Site.Params.title }}
@@ -141,6 +146,9 @@
 				<div class="content color-dark text-small">
 					{{ range .Site.Params.team.list }}
 						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						{{- with .position_extended }}
+							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
+						{{- end }} 
 						<ul>
 							{{ range split .name "," }}
 								<li>{{ . | markdownify }}</li>
