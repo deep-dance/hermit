@@ -26,6 +26,9 @@
 					{{- with .Site.Params.subtitle }}
 						<p>{{.}}</p>
 					{{- end }}
+					{{- with .Site.Params.format }}
+						<p>{{.}}</p>
+					{{- end }}
 					{{- with .Site.Params.date }}
 						<p>{{.}}</p>
 					{{- end }}
@@ -109,6 +112,9 @@
 					{{- with .Site.Params.subtitle }}
 						<p class="invisible">{{.}}</p>
 					{{- end }}
+					{{- with .Site.Params.format }}
+						<p>{{.}}</p>
+					{{- end }}
 					{{- with .Site.Params.date }}
 						<p class="">{{.}}</p>
 					{{- end }}
@@ -188,4 +194,6 @@
 		{{ partial "footer"}}
 	</div>
 	<div id="overlay" class="overlay"></div>
+	<iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
+		width="320" height="180" frameborder="0" allowfullscreen></iframe>
 {{ end }}
