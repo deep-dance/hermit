@@ -1,0 +1,34 @@
+<div id="exhibits">
+    <div class="row posts-group">
+        {{ range .Site.Pages }}
+            {{ if eq .Section "show" "choreography" "code" "about" }}
+                <div class="col-sm-6 post-item">
+                    {{ if .Params.link }}
+                        <a class="single-link" style="background-image: url({{ .Params.image }})" 
+                            href="{{.Params.link}}">
+                            <span class="post-title">{{ .Title }} →</span>
+                            <div class="single-link-overlay">
+                            </div>
+                        </a> 
+                    {{ else }}
+                        <a class="single-link" style="background-image: url({{ .Params.image }})" 
+                            href="{{.Permalink}}">
+                            <span class="post-title">{{ .Title }} →</span>
+                            
+                            <div class="single-link-overlay">
+                                {{ with .Params.teaser }}
+                                    <p class="text-small">{{ . | markdownify }}</p>
+                                {{ end }}
+                            </div>
+                        </a>
+                        <!-- <a class="single-link single-link-overlay" href="{{.Permalink}}" target="_blank">
+
+                        </a> -->
+                    {{ end }}
+                </div>
+                
+            
+            {{ end }}
+        {{ end }}
+    </div>
+</div>

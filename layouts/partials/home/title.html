@@ -1,0 +1,35 @@
+{{ $renderOverlay := .Scratch.Get "renderOverlay" }}
+<div id="{{ cond (eq $renderOverlay "False") "home-title" "home-title-overlay" }}">
+    <div class="column-spacer-90"></div>
+    <div class="column-spacer-90"></div>
+    <div class="color-dark text-big underline">
+        {{- with .Site.Params.title }}
+            <p>{{.}}</p>
+        {{- end }}
+        {{- with .Site.Params.subtitle }}
+            <p class="{{ cond (eq $renderOverlay "True") "invisible" "" }}">{{.}}</p>
+        {{- end }}
+        {{- if (eq .Site.Params.mode "idle") }}
+            {{- with .Site.Params.format }}
+                <p>{{.}}</p>
+            {{- end }}
+            {{- with .Site.Params.date }}
+                <p>{{.}}</p>
+            {{- end }}
+            {{- with .Site.Params.time }}
+                <p>{{.}}</p>
+            {{- end }}
+        {{- end }}
+        {{- if (eq .Site.Params.mode "prerelease") }}
+            {{- with .Site.Params.format }}
+                <p>{{.}}</p>
+            {{- end }}
+            <p id="{{ cond (eq $renderOverlay "True") "timer" "" }}"></p>
+        {{- end }}
+        {{- if (eq .Site.Params.mode "release") }}
+            {{- with .Site.Params.nowOnline }}
+                <a href="#exhibits">{{.}} →</a>
+            {{- end }}
+        {{- end }}
+    </div>
+</div>

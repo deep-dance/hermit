@@ -15,28 +15,10 @@
 	<div class="bg-img"></div>
 	{{- end }}
 	<div id="spotlight" class="animated fadeIn">
+		{{ .Scratch.Set "renderOverlay" "False" }}
 		<div id="home-content">
-			<div id="home-title">
-				<div class="column-spacer-90"></div>
-				<div class="column-spacer-90"></div>
-				<div class="color-dark text-big underline">
-					{{- with .Site.Params.title }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.subtitle }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.format }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.date }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.time }}
-						<p>{{.}}</p>
-					{{- end }}
-				</div>
-			</div>
+			{{ partial "home/title.html" . }}
+			
 			<div id="home-dates" class="color-bright">
 				<!-- <ul id="home-team">
 					{{- with .Site.Params.team.title }}
@@ -57,6 +39,11 @@
 					
 				</div>
 			</div>
+			
+			{{ if or (eq .Site.Params.mode "release") (eq .Site.Params.mode "default") }}
+				{{ partial "home/exhibits.html" . }}
+			{{ end }}
+			
 			<!-- Placeholder -->
 			<div id="home-about" class="color-bright invisible">
 				<div class="column-spacer-40"></div>
@@ -73,7 +60,7 @@
 				<div class="column-spacer-40"></div>
 				<div class="content color-dark text-small">
 					{{ range .Site.Params.team.list }}
-						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						<p class="underline no-margin-bottom margin-top">{{ .position | markdownify }}</p>
 						{{- with .position_extended }}
 							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
 						{{- end }} 
@@ -86,6 +73,7 @@
 				</div>
 			</div>
 		</div>
+		{{ .Scratch.Set "renderOverlay" "True" }}
 		{{/*  <div id="home-footer">
 			{{- with .Site.Params.social }}
 			<div id="home-social">
@@ -101,28 +89,11 @@
 		</div>  */}}
 	</div>
 	<div id="spotlight-overlay" class="animated fadeIn">
+		{{ .Scratch.Set "renderOverlay" "True" }}
 		<div id="home-content-overlay">
-			<div id="home-title-overlay">
-				<div class="column-spacer-90"></div>
-				<div class="column-spacer-90"></div>
-				<div class="color-dark text-big underline">
-					{{- with .Site.Params.title }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.subtitle }}
-						<p class="invisible">{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.format }}
-						<p>{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.date }}
-						<p class="">{{.}}</p>
-					{{- end }}
-					{{- with .Site.Params.time }}
-						<p class="">{{.}}</p>
-					{{- end }}
-				</div>
-			</div>
+			
+			{{ partial "home/title.html" . }}
+			
 			<!-- Placeholder -->
 			<div id="home-intro-overlay" class="text-big invisible">
 				<div class="color-dark">
@@ -134,6 +105,11 @@
 					
 				</div>
 			</div>
+			
+			{{ if or (eq .Site.Params.mode "release") (eq .Site.Params.mode "default") }}
+				{{ partial "home/exhibits.html" . }}
+			{{ end }}
+
 			<!-- -->
 			<div id="home-about-overlay" class="color-bright">
 				<div class="column-spacer-40"></div>
@@ -151,7 +127,7 @@
 				<div class="column-spacer-40"></div>
 				<div class="content color-dark text-small">
 					{{ range .Site.Params.team.list }}
-						<p class="underline no-margin-bottom">{{ .position | markdownify }}</p>
+						<p class="underline no-margin-bottom margin-top">{{ .position | markdownify }}</p>
 						{{- with .position_extended }}
 							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
 						{{- end }} 
@@ -190,10 +166,14 @@
 					{{- end }}  */}}
 				</div>
 			</div>
+
+			{{ .Scratch.Set "renderOverlay" "False" }}
 		</div>
 		{{ partial "footer"}}
 	</div>
 	<div id="overlay" class="overlay"></div>
+	<!-- <iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
+		width="320" height="180" frameborder="0" allowfullscreen></iframe> -->
 	<iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
-		width="320" height="180" frameborder="0" allowfullscreen></iframe>
+		width="1280" height="720" frameborder="0" allowfullscreen></iframe>
 {{ end }}
