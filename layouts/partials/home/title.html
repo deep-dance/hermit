@@ -2,33 +2,33 @@
 <div id="{{ cond (eq $renderOverlay "False") "home-title" "home-title-overlay" }}">
     <div class="column-spacer-90"></div>
     <div class="column-spacer-90"></div>
-    <div class="color-dark text-big underline">
+    <div class="color-dark text-big">
         {{- with .Site.Params.title }}
-            <p>{{.}}</p>
+            <p class="underline">{{.}}</p>
         {{- end }}
         {{- with .Site.Params.subtitle }}
-            <p class="{{ cond (eq $renderOverlay "True") "invisible" "" }}">{{.}}</p>
+            <p class="underline {{ cond (eq $renderOverlay "True") "invisible" "" }}">{{.}}</p>
         {{- end }}
         {{- if (eq .Site.Params.mode "idle") }}
             {{- with .Site.Params.format }}
-                <p>{{.}}</p>
+                <p class="underline">{{.}}</p>
             {{- end }}
             {{- with .Site.Params.date }}
-                <p>{{.}}</p>
+                <p class="underline">{{.}}</p>
             {{- end }}
             {{- with .Site.Params.time }}
-                <p>{{.}}</p>
+                <p class="underline">{{.}}</p>
             {{- end }}
         {{- end }}
         {{- if (eq .Site.Params.mode "prerelease") }}
             {{- with .Site.Params.format }}
-                <p>{{.}}</p>
+                <p class="underline">{{.}}</p>
             {{- end }}
-            <p id="{{ cond (eq $renderOverlay "True") "timer" "" }}"></p>
+            <p id="{{ cond (eq $renderOverlay "True") "timer" "" }}" class="underline"></p>
         {{- end }}
         {{- if (eq .Site.Params.mode "release") }}
             {{- with .Site.Params.nowOnline }}
-                <a href="#exhibits">{{.}} →</a>
+                <a href="#exhibits">{{.}}</a><a class="no-underline" href="#exhibits"> →</a>
             {{- end }}
         {{- end }}
     </div>

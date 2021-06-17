@@ -44,34 +44,9 @@
 				{{ partial "home/exhibits.html" . }}
 			{{ end }}
 			
-			<!-- Placeholder -->
-			<div id="home-about" class="color-bright invisible">
-				<div class="column-spacer-40"></div>
-				<div class="content color-dark text-small">
-					<p>
-						{{ range .Site.Params.about.list }}
-							{{ .text }}
-						{{ end }}
-					</p>
-					
-				</div>
-			</div>
-			<div id="home-team" class="color-bright">
-				<div class="column-spacer-40"></div>
-				<div class="content color-dark text-small">
-					{{ range .Site.Params.team.list }}
-						<p class="underline no-margin-bottom margin-top">{{ .position | markdownify }}</p>
-						{{- with .position_extended }}
-							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
-						{{- end }} 
-						<ul>
-							{{ range split .name "," }}
-								<li>{{ . | markdownify }}</li>
-							{{ end }}
-						</ul>
-					{{ end }}
-				</div>
-			</div>
+			<!-- ABOUT -->
+			{{ partial "home/about.html" . }}
+
 		</div>
 		{{ .Scratch.Set "renderOverlay" "True" }}
 		{{/*  <div id="home-footer">
@@ -110,36 +85,9 @@
 				{{ partial "home/exhibits.html" . }}
 			{{ end }}
 
-			<!-- -->
-			<div id="home-about-overlay" class="color-bright">
-				<div class="column-spacer-40"></div>
-				<div class="content color-dark text-small">
-					<p>
-						{{ range .Site.Params.about.list }}
-							{{ .text }}
-						{{ end }}
-					</p>
-					
-				</div>
-			</div>
-			<!-- Placeholder -->
-			<div id="home-team-overlay" class="color-bright invisible">
-				<div class="column-spacer-40"></div>
-				<div class="content color-dark text-small">
-					{{ range .Site.Params.team.list }}
-						<p class="underline no-margin-bottom margin-top">{{ .position | markdownify }}</p>
-						{{- with .position_extended }}
-							<p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
-						{{- end }} 
-						<ul>
-							{{ range split .name "," }}
-								<li>{{ . | markdownify }}</li>
-							{{ end }}
-						</ul>
-					{{ end }}
-				</div>
-			</div>
-			<!-- -->
+			<!-- ABOUT -->
+			{{ partial "home/about.html" . }}
+
 			<div id="home-funding-overlay" class="color-bright">
 				<div class="column-spacer-40"></div>
 				<div class="content color-dark">
@@ -174,6 +122,8 @@
 	<div id="overlay" class="overlay"></div>
 	<!-- <iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
 		width="320" height="180" frameborder="0" allowfullscreen></iframe> -->
-	<iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
-		width="1280" height="720" frameborder="0" allowfullscreen></iframe>
+	{{ if not (eq .Site.Params.mode "release" ) }}
+		<iframe id="trailer" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
+			width="1280" height="720" frameborder="0" allowfullscreen></iframe>
+	{{ end }}
 {{ end }}

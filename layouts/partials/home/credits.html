@@ -1,0 +1,18 @@
+{{ $renderOverlay := .Scratch.Get "renderOverlay" }}
+<div id="{{ cond (eq $renderOverlay "False") "home-team" "home-team-overlay" }}"
+    class="{{ cond (eq $renderOverlay "True") "invisible" "" }}"></div>
+    <div class="column-spacer-40"></div>
+    <div class="content color-dark text-small">
+        {{ range .Site.Params.team.list }}
+            <p class="underline no-margin-bottom margin-top">{{ .position | markdownify }}</p>
+            {{- with .position_extended }}
+                <p class="underline no-margin-bottom no-margin-top">{{ . | markdownify }}</p>
+            {{- end }} 
+            <ul class="credits">
+                {{ range split .name "," }}
+                    <li>{{ . | markdownify }}</li>
+                {{ end }}
+            </ul>
+        {{ end }}
+    </div>
+</div>

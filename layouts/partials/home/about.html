@@ -1,0 +1,19 @@
+{{ $renderOverlay := .Scratch.Get "renderOverlay" }}
+<div id="{{ cond (eq $renderOverlay "False") "home-about" "home-about-overlay" }}" 
+    class="color-bright {{ cond (eq $renderOverlay "False") "invisible" "" }}">
+    <div class="column-spacer-40"></div>
+    <div class="content color-dark text-small">
+        <p>
+            {{ range .Site.Params.about.list }}
+                {{ .text }}
+            {{ end }}
+        </p>
+        <br/>
+        <br/>
+        <p>
+            <a href="{{ .Site.BaseURL }}about"><span class="post-title">Read more about Deep.Dance <span>→</span></span></a>
+            <br/>
+            <a href="{{ .Site.BaseURL }}code"><span class="post-title">Read more about the code <span>→</span></span></a>
+        </p>
+    </div>
+</div>

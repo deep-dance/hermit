@@ -1,33 +1,51 @@
+{{ $renderOverlay := .Scratch.Get "renderOverlay" }}
 <div id="exhibits">
-    <div class="row posts-group">
+	<div class="content-large color-dark text-small">
         {{ range .Site.Pages }}
-            {{ if eq .Section "show" "choreography" "code" "about" }}
-                <div class="col-sm-6 post-item">
-                    {{ if .Params.link }}
-                        <a class="single-link" style="background-image: url({{ .Params.image }})" 
-                            href="{{.Params.link}}">
-                            <span class="post-title">{{ .Title }} →</span>
-                            <div class="single-link-overlay">
-                            </div>
+            {{ if eq .Section "show"}}
+                <div class="post-item">
+                    {{ if .Params.image }}
+                        <a class="single-link single-link-image" style="background-image: url({{ .Params.image }})" 
+                            href="{{ .Permalink }}">
+                                {{ .Title }}
+                                <span class="no-underline"> →</span>
+                            <!-- <span class="post-title">{{ .Title }} <span>→</span></span> -->
                         </a> 
                     {{ else }}
-                        <a class="single-link" style="background-image: url({{ .Params.image }})" 
-                            href="{{.Permalink}}">
-                            <span class="post-title">{{ .Title }} →</span>
-                            
-                            <div class="single-link-overlay">
-                                {{ with .Params.teaser }}
-                                    <p class="text-small">{{ . | markdownify }}</p>
-                                {{ end }}
-                            </div>
+                        <a class="single-link bg-color-{{ .Params.color }} {{ cond (eq $renderOverlay "True") "bg-color-none" "" }} background-color: #bb7093;" style="background-image: url({{ .Params.image }})" 
+                            href="{{ .Permalink }}">
+                                {{ .Title }}
+                                <span class="no-underline"> →</span>
+                            <!-- <span class="post-title">{{ .Title }} <span class="no-underline">→</span></span> -->
                         </a>
-                        <!-- <a class="single-link single-link-overlay" href="{{.Permalink}}" target="_blank">
-
-                        </a> -->
                     {{ end }}
                 </div>
-                
-            
+            {{ end }}
+        {{ end }}
+    </div>
+</div>
+<div id="exhibits-ext">
+    <div class="column-spacer-40"></div>
+	<div class="content color-dark text-small">
+        {{ range .Site.Pages }}
+            {{ if eq .Section "choreography" }}
+                <div class="post-item">
+                    {{ if .Params.image }}
+                        <a class="single-link single-link-image single-link-image-small" style="background-image: url({{ .Params.image }})" 
+                            href="{{ .Permalink }}">
+                                {{ .Title }}
+                                <span class="no-underline"> →</span>
+                            <!-- <span class="post-title">{{ .Title }} <span>→</span></span> -->
+                        </a> 
+                    {{ else }}
+                        <a class="single-link bg-color-{{ .Params.color }} {{ cond (eq $renderOverlay "True") "bg-color-none" "" }} background-color: #bb7093;" style="background-image: url({{ .Params.image }})" 
+                            href="{{ .Permalink }}">
+                                {{ .Title }}
+                                <span class="no-underline"> →</span>
+                            <!-- <span class="post-title">{{ .Title }} <span class="no-underline">→</span></span> -->
+                        </a>
+                    {{ end }}
+                </div>
             {{ end }}
         {{ end }}
     </div>
