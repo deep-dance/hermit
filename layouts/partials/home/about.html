@@ -5,10 +5,9 @@
     <div class="content color-dark text-small">
         <p>
             {{ range .Site.Params.about.list }}
-                {{ .text }}
+                {{ .text | markdownify }}
             {{ end }}
         </p>
-        <br/>
         <br/>
         <p>
             <a href="{{ .Site.BaseURL }}about"><span class="post-title">Read more about Deep.Dance <span>→</span></span></a>
