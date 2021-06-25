@@ -96,6 +96,11 @@
 							<a target="_blank" href="{{ .href }}"></a>
 						</div>
 					{{ end }}
+					{{ with .Site.Params.funding.daku_ext_en }}
+						<p class="text-tiny margin-top-large">
+							{{ . | markdownify }}	
+						</p>
+					{{ end}}
 				</div>
 			</div>
 
