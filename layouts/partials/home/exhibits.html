@@ -3,23 +3,31 @@
 	<div class="content-large color-dark text-small">
         {{ range .Site.Pages }}
             {{ if eq .Section "show"}}
-                <div class="post-item">
-                    {{ if .Params.image }}
-                        <a class="single-link single-link-image" style="background-image: url({{ .Params.image }})" 
-                            href="{{ .Permalink }}">
-                                {{ .Title }}
-                                <span class="no-underline"> →</span>
-                            <!-- <span class="post-title">{{ .Title }} <span>→</span></span> -->
-                        </a> 
-                    {{ else }}
-                        <a class="single-link bg-color-{{ .Params.color }} {{ cond (eq $renderOverlay "True") "bg-color-none" "" }} background-color: #bb7093;" style="background-image: url({{ .Params.image }})" 
-                            href="{{ .Permalink }}">
-                                {{ .Title }}
-                                <span class="no-underline"> →</span>
-                            <!-- <span class="post-title">{{ .Title }} <span class="no-underline">→</span></span> -->
-                        </a>
+                {{ if eq .Site.Params.mode "release" }}
+                    <div class="post-item">
+                        {{ if .Params.image }}
+                            <a class="single-link single-link-image" style="background-image: url({{ .Params.image }})" 
+                                href="{{ .Permalink }}">
+                                    {{ .Title }}
+                                    <span class="no-underline"> →</span>
+                                <!-- <span class="post-title">{{ .Title }} <span>→</span></span> -->
+                            </a> 
+                        {{ else }}
+                            <a class="single-link bg-color-{{ .Params.color }} {{ cond (eq $renderOverlay "True") "bg-color-none" "" }} background-color: #bb7093;" style="background-image: url({{ .Params.image }})" 
+                                href="{{ .Permalink }}">
+                                    {{ .Title }}
+                                    <span class="no-underline"> →</span>
+                                <!-- <span class="post-title">{{ .Title }} <span class="no-underline">→</span></span> -->
+                            </a>
+                        {{ end }}
+                    </div>
+                {{ else }}
+                    <iframe id="trailer-big" title="vimeo-player" src="https://player.vimeo.com/video/559893868"
+                        width="1920" height="1080" frameborder="0" allowfullscreen></iframe>
+                    {{ with .Site.Params.newsletter.headline }}
+                        <a href="#newsletter-notice">{{ . }} →</a>
                     {{ end }}
-                </div>
+                {{ end }}
             {{ end }}
         {{ end }}
     </div>
